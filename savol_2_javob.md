@@ -91,7 +91,7 @@ $$\boxed{a = 1{,}0545}$$
 
 ### 1.6. Darajali funksiya modeli
 
-$$\boxed{\hat{y} = 1{,}0545 \cdot x^{0{,}659}}$$
+$$\hat{y} = 1{,}0545 \cdot x^{0{,}659}$$
 
 ---
 
@@ -127,7 +127,7 @@ $$\bar{A} = \frac{1}{n} \sum_{i=1}^{n} \frac{|y_i - \hat{y}_i|}{y_i} \times 100\
 
 $$\bar{A} = \frac{217{,}79\%}{10} = 21{,}78\%$$
 
-$$\boxed{\bar{A} = 21{,}78\%}$$
+$$\bar{A} = 21{,}78\%$$
 
 **Talqin:**
 
@@ -172,7 +172,7 @@ $$R^2 = 1 - \frac{Q_{\text{ost}}}{Q_y} = 1 - \frac{13{,}3250}{18{,}4360} = 1 - 0
 
 $$R = \sqrt{0{,}2772} = 0{,}5265$$
 
-$$\boxed{R^2 = 0{,}2772, \quad R = 0{,}5265}$$
+$$R^2 = 0{,}2772, \quad R = 0{,}5265$$
 
 ---
 
@@ -182,7 +182,7 @@ $$\boxed{R^2 = 0{,}2772, \quad R = 0{,}5265}$$
 
 **Formula:**
 
-$$F_{\text{hisob}} = \frac{R^2 / k}{(1 - R^2)/(n - k - 1)}$$
+$$F_{\text{hisob}} = \frac{R^2 / k}{(1 - R^2) / (n - k - 1)}$$
 
 bu yerda:
 - $k = 1$ — regressiya parametrlari soni (b)
@@ -193,7 +193,7 @@ bu yerda:
 
 $$F_{\text{hisob}} = \frac{0{,}2772 / 1}{(1 - 0{,}2772) / 8} = \frac{0{,}2772}{0{,}7228 / 8} = \frac{0{,}2772}{0{,}09035}$$
 
-$$\boxed{F_{\text{hisob}} = 3{,}07}$$
+$$F_{\text{hisob}} = 3{,}07$$
 
 **Jadval qiymati** ($\alpha = 0{,}05$, $k_1 = 1$, $k_2 = 8$):
 

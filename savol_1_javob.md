@@ -100,7 +100,7 @@ $$R^2 = 1 - \frac{Q_{\text{ost}}}{Q_y}, \qquad R = \sqrt{R^2}$$
 
 Chiziqsiz regressiyada korrelyatsiya quyidagicha hisoblanadi:
 
-$$\boxed{R = \sqrt{1 - \frac{\sum(y_i - \hat{y}_i)^2}{\sum(y_i - \bar{y})^2}}}$$
+$$R = \sqrt{1 - \frac{\sum(y_i - \hat{y}_i)^2}{\sum(y_i - \bar{y})^2}}$$
 
 $R$ qiymati **1 ga yaqin** bo'lsa — tanlangan chiziqsiz model kuzatilgan ma'lumotlarga **yaxshi mos keladi**.  
 $R$ qiymati **0 ga yaqin** bo'lsa — model ma'lumotlarni tushuntira olmaydi va boshqa model tanlash kerak.
