@@ -1,0 +1,295 @@
+@import "tailwindcss";
+
+/* ---------------------------------- */
+/*  Design tokens — Prism dark system  */
+/* ---------------------------------- */
+
+@theme {
+  /* Surfaces */
+  --color-void: #05060a;
+  --color-ink: #0a0c12;
+  --color-surface: #10131c;
+  --color-line: rgba(255, 255, 255, 0.08);
+
+  /* Text */
+  --color-fg: #f5f6f8;
+  --color-muted: #9aa1b3;
+  --color-faint: #686f81;
+
+  /* Spectrum accents */
+  --color-iris: #6e66ff;
+  --color-violet: #8b5cf6;
+  --color-cyan: #22d3ee;
+  --color-mint: #5eead4;
+  --color-rose: #fb7185;
+
+  /* Type */
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, "SF Mono", monospace;
+
+  /* Motion */
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --animate-marquee: marquee 44s linear infinite;
+  --animate-drift: drift 9s ease-in-out infinite alternate;
+  --animate-aurora: aurora 22s ease-in-out infinite alternate;
+  --animate-orbit: orbit 14s linear infinite;
+  --animate-scroll-line: scroll-line 2.2s var(--ease-out-expo) infinite;
+  --animate-pulse-dot: pulse-dot 2.4s ease-in-out infinite;
+  --animate-shimmer: shimmer 2.8s linear infinite;
+}
+
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes drift {
+  from {
+    transform: translateY(-7px);
+  }
+  to {
+    transform: translateY(7px);
+  }
+}
+
+@keyframes aurora {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(6%, -4%, 0) scale(1.12);
+  }
+  100% {
+    transform: translate3d(-5%, 5%, 0) scale(0.96);
+  }
+}
+
+@keyframes orbit {
+  from {
+    transform: rotate(0deg) translateX(var(--orbit-r)) rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg) translateX(var(--orbit-r)) rotate(-360deg);
+  }
+}
+
+@keyframes scroll-line {
+  0% {
+    transform: scaleY(0);
+    transform-origin: top;
+  }
+  45% {
+    transform: scaleY(1);
+    transform-origin: top;
+  }
+  55% {
+    transform: scaleY(1);
+    transform-origin: bottom;
+  }
+  100% {
+    transform: scaleY(0);
+    transform-origin: bottom;
+  }
+}
+
+@keyframes pulse-dot {
+  0%,
+  100% {
+    opacity: 1;
+    box-shadow: 0 0 0 0 rgba(94, 234, 212, 0.45);
+  }
+  50% {
+    opacity: 0.72;
+    box-shadow: 0 0 0 5px rgba(94, 234, 212, 0);
+  }
+}
+
+@keyframes shimmer {
+  from {
+    background-position: 200% 50%;
+  }
+  to {
+    background-position: -200% 50%;
+  }
+}
+
+/* ---------------------------------- */
+/*  Base                               */
+/* ---------------------------------- */
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    /* Keep anchored sections clear of the fixed navbar */
+    scroll-padding-top: 6rem;
+    overflow-x: clip;
+  }
+
+  body {
+    background-color: var(--color-void);
+    color: var(--color-fg);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    overflow-x: clip;
+  }
+
+  ::selection {
+    background: rgba(110, 102, 255, 0.45);
+    color: #fff;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-iris);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  /* Subtle, dark-native scrollbar */
+  @supports (scrollbar-width: thin) {
+    * {
+      scrollbar-width: thin;
+      scrollbar-color: rgba(255, 255, 255, 0.14) transparent;
+    }
+  }
+}
+
+/* ---------------------------------- */
+/*  Composable surface utilities       */
+/* ---------------------------------- */
+
+@layer components {
+  .container-x {
+    margin-inline: auto;
+    width: 100%;
+    max-width: 80rem;
+    padding-inline: 1.5rem;
+  }
+
+  @media (min-width: 1024px) {
+    .container-x {
+      padding-inline: 2rem;
+    }
+  }
+
+  /* Frosted glass surface */
+  .glass {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+  }
+
+  .glass-strong {
+    background: rgba(13, 15, 23, 0.72);
+    border: 1px solid rgba(255, 255, 255, 0.09);
+    backdrop-filter: blur(22px) saturate(1.4);
+    -webkit-backdrop-filter: blur(22px) saturate(1.4);
+  }
+
+  /* Headline gradients */
+  .text-spectrum {
+    background-image: linear-gradient(
+      100deg,
+      #fff 10%,
+      #b9b3ff 38%,
+      #7dd7f5 62%,
+      #fff 90%
+    );
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+  }
+
+  .text-iris-glow {
+    background-image: linear-gradient(120deg, #a5a0ff, #6e66ff 45%, #22d3ee);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+  }
+
+  /* Hairline gradient divider */
+  .hairline-h {
+    height: 1px;
+    background: linear-gradient(
+      to right,
+      transparent,
+      rgba(255, 255, 255, 0.12),
+      transparent
+    );
+  }
+
+  /* Film-grain overlay (data URI fractal noise) */
+  .noise {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+    background-size: 160px 160px;
+  }
+
+  /* Hero grid floor */
+  .grid-bg {
+    background-image:
+      linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+    background-size: 64px 64px;
+    mask-image: radial-gradient(ellipse 80% 64% at 50% 38%, black 30%, transparent 72%);
+    -webkit-mask-image: radial-gradient(ellipse 80% 64% at 50% 38%, black 30%, transparent 72%);
+  }
+
+  /* Edge fades for marquees / overflow rows */
+  .mask-fade-x {
+    mask-image: linear-gradient(to right, transparent, black 12%, black 88%, transparent);
+    -webkit-mask-image: linear-gradient(to right, transparent, black 12%, black 88%, transparent);
+  }
+
+  /* Cursor-tracked spotlight (driven by --mx / --my custom props) */
+  .spotlight::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.45s ease;
+    background: radial-gradient(
+      460px circle at var(--mx, 50%) var(--my, 50%),
+      rgba(110, 102, 255, 0.14),
+      rgba(34, 211, 238, 0.05) 42%,
+      transparent 68%
+    );
+  }
+
+  .spotlight:hover::before {
+    opacity: 1;
+  }
+
+  .marquee-track {
+    animation: var(--animate-marquee);
+  }
+
+  .marquee-track:hover {
+    animation-play-state: paused;
+  }
+
+  .perspective-1200 {
+    perspective: 1200px;
+  }
+}
+
+/* ---------------------------------- */
+/*  Reduced motion                     */
+/* ---------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
