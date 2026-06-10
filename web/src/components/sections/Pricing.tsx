@@ -77,14 +77,8 @@ export function Pricing() {
         <Stagger className="grid items-stretch gap-5 lg:grid-cols-3">
           {PRICING.map((tier) => {
             const price = tier.monthly === null ? null : annual ? tier.annual : tier.monthly;
-            const card = (
-              <GlassCard
-                interactive={!tier.popular}
-                className={cn(
-                  "flex h-full flex-col p-8",
-                  tier.popular && "rounded-[calc(1.5rem-1px)] border-0 bg-ink/95"
-                )}
-              >
+            const inner = (
+              <>
                 <div className="flex items-center justify-between">
                   <h3 className="text-lg font-medium tracking-tight text-fg">{tier.name}</h3>
                   {tier.popular && (
@@ -141,17 +135,20 @@ export function Pricing() {
                     {tier.cta}
                   </Button>
                 </div>
-              </GlassCard>
+              </>
             );
 
             return (
               <StaggerItem key={tier.name} className={cn(tier.popular && "lg:-my-3")}>
                 {tier.popular ? (
                   <div className="relative h-full rounded-3xl bg-gradient-to-b from-iris/70 via-violet/40 to-cyan/30 p-px shadow-[0_24px_90px_-30px_rgba(110,102,255,0.5)]">
-                    {card}
+                    {/* solid dark interior so the gradient reads as a border */}
+                    <div className="flex h-full flex-col rounded-[calc(1.5rem-1px)] bg-ink p-8">
+                      {inner}
+                    </div>
                   </div>
                 ) : (
-                  card
+                  <GlassCard className="flex h-full flex-col p-8">{inner}</GlassCard>
                 )}
               </StaggerItem>
             );

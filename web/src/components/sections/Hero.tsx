@@ -18,9 +18,9 @@ const HeroScene = dynamic(() => import("@/components/three/HeroScene"), {
   ssr: false,
 });
 
-const HEADLINE: { words: string[]; className: string }[] = [
-  { words: ["Every", "signal."], className: "text-fg" },
-  { words: ["One", "focus."], className: "text-spectrum" },
+const HEADLINE: { text: string; className: string }[] = [
+  { text: "Every signal.", className: "text-fg" },
+  { text: "One focus.", className: "text-spectrum" },
 ];
 
 export function Hero() {
@@ -119,23 +119,17 @@ export function Hero() {
 
           <h1 className="mt-7 text-[2.9rem] font-semibold leading-[1.02] tracking-[-0.04em] sm:text-6xl md:text-7xl lg:text-[5.4rem]">
             {HEADLINE.map((line, i) => (
-              <span key={i} className={`block overflow-hidden pb-[0.08em] ${line.className}`}>
-                {line.words.map((word, j) => (
-                  <m.span
-                    key={j}
-                    className="inline-block will-change-transform"
-                    initial={{ y: "115%" }}
-                    animate={{ y: 0 }}
-                    transition={{
-                      duration: 0.9,
-                      delay: 0.18 + (i * line.words.length + j) * 0.085,
-                      ease: EASE,
-                    }}
-                  >
-                    {word}
-                    {j < line.words.length - 1 ? " " : ""}
-                  </m.span>
-                ))}
+              /* Gradient + transform must live on the same element, or
+                 background-clip:text stops clipping under composited children. */
+              <span key={i} className="block overflow-hidden pb-[0.08em]">
+                <m.span
+                  className={`block will-change-transform ${line.className}`}
+                  initial={{ y: "115%" }}
+                  animate={{ y: 0 }}
+                  transition={{ duration: 1, delay: 0.18 + i * 0.17, ease: EASE }}
+                >
+                  {line.text}
+                </m.span>
               </span>
             ))}
           </h1>
