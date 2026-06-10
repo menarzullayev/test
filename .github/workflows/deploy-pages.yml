@@ -2,7 +2,7 @@ name: Deploy landing page to GitHub Pages
 
 on:
   push:
-    branches: [claude/practical-hamilton-zh61hn]
+    branches: [main, claude/practical-hamilton-zh61hn]
     paths:
       - "web/**"
       - ".github/workflows/deploy-pages.yml"
